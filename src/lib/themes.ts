@@ -1,4 +1,5 @@
 export const themes = [
+    "corporate",
     "light",
     "dark",
     "cupcake",

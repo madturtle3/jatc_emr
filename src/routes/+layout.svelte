@@ -20,6 +20,7 @@
 			);
 		} catch (e) {}
 	</script>
+	<title>EMR</title>
 </svelte:head>
 
 {#snippet themebox(themename: string)}
@@ -54,6 +55,7 @@
 			class="dropdown-content menu bg-base-200 rounded-box z-[1] p-2 shadow-2xl gap-2 flex flex-col max-h-[50vh] overflow-y-visible"
 		>
 			<div class="py-2 flex flex-col gap-1 overflow-y-scroll px-3">
+				{@render themebox("default")}
 				{#each themes as theme}
 					{@render themebox(theme)}
 				{/each}

@@ -10,6 +10,6 @@ export default {
     daisyui
   ],
   daisyui: {
-    themes,
+    themes: themes,
   },
 } satisfies Config;

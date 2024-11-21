@@ -1,28 +1,28 @@
 <script lang="ts">
+    import InputBox from "./InputBox.svelte";
     import type { SearchResult } from "./+page.server";
     let { data }: { data: SearchResult } = $props();
 </script>
-
-{#snippet inputbox(label: string, name: string, input_type: string = "text")}
-    <label class="form-control">
-        <div class="label">
-            <span class="label-text">{label}</span>
-        </div>
-        <input type={input_type} {name} class="input input-bordered w-full" />
-    </label>
-{/snippet}
 <div class="flex flex-col content-start justify-center mx-5 gap-5">
     <div class="card shadow-xl bg-base-200/75 w-full">
-        <form class="card-body flex-col" method="GET" action="/emr/search/" data-sveltekit-reload>
-            <h1 class="card-title">Search for Patient</h1>
+        <form class="card-body flex-col" method="GET">
+            <h1 class="card-title flex justify-between">
+                <p>Search for Patient</p>
+                <input
+                    type="submit"
+                    class="btn btn-secondary"
+                    value="Register"
+                    formaction="/emr/register"
+                />
+            </h1>
             <div
                 class="grid grid-cols-[repeat(auto-fit,minmax(20ch,1fr))] items-end gap-2"
             >
-                {@render inputbox("First Name", "fname")}
-                {@render inputbox("Last Name", "lname")}
-                {@render inputbox("Phone #", "phone")}
-                {@render inputbox("Chart #", "chart", "number")}
-                {@render inputbox("Date of Birth", "dob", "date")}
+                <InputBox label="First Name" name="fname" />
+                <InputBox label="Last Name" name="lname" />
+                <InputBox label="Phone #" name="phone" type="tel" />
+                <InputBox label="Chart #" name="chart" type="number" />
+                <InputBox label="Date of Birth" name="dob" type="date" />
                 <input type="submit" class="btn btn-primary" />
             </div>
         </form>
@@ -59,8 +59,11 @@
                             <td>
                                 {person.chartnum}
                             </td>
-                            <td>
-                                <a href="/emr/{person.chartnum}" class="btn btn-primary btn-xs">Open</a>
+                            <td class="text-center">
+                                <a
+                                    href="/emr/{person.chartnum}"
+                                    class="btn btn-primary btn-xs">Open</a
+                                >
                             </td>
                         </tr>
                     {/each}
